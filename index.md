@@ -77,7 +77,7 @@ I've got you covered.
 
 As well as the graphical interface you can also get a ton of data directly over HTTP requests provided in JSON format.
 
-Try http://localhost:5000/dataset/autopilot for an example.  Other endpoints are navigation, airspeed, compass, vertical_speed, fuel, flaps, throttle, gear and trim.
+Try [http://localhost:5000/dataset/autopilot](http://localhost:5000/dataset/autopilot) for an example.  Other endpoints are navigation, airspeed, compass, vertical_speed, fuel, flaps, throttle, gear and trim.
 
 ## This sounds great. Take my money!
 
@@ -91,9 +91,9 @@ Please [raise an issue on Github](https://github.com/hankhank10/MSFS2020-cockpit
 
 Better still, if you know how this should be better or want to contribute then please fork my code, rewrite it and put in a pull request.
 
-## Just give me the source code.
+## Just give me the source code already.
 
-Ok, ok: https://github.com/hankhank10/MSFS2020-cockpit-companion/
+Ok, ok: [https://github.com/hankhank10/MSFS2020-cockpit-companion/](https://github.com/hankhank10/MSFS2020-cockpit-companion/)
 
 ## Are you affiliated with Microsoft? Do I get a full warranty with this code? Should I use this to fly my actual airplane in the real world?
 
