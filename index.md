@@ -14,7 +14,7 @@ If you answer yes, the MSFS2020 Cockpit Companion may be for you.
 
 It gives you a moving map of your aircraft's current location.  You can scroll around, have it follow your aircraft or not, set a variety of different map options and overlay with aviation data and weather (coming soon).
 
-IMAGE
+![Map.png]({{site.baseurl}}/Map.png)
 
 It also shows a variety of different secondary aircraft controls such as autopilot, gear, flaps, trim, cabin seat belts, fuel, etc.  You can interface directly with these through the browser to control the aircraft.
 
