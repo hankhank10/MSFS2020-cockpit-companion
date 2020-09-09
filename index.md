@@ -18,11 +18,12 @@ It gives you a moving map of your aircraft's current location.  You can scroll a
 
 It also shows a variety of different secondary aircraft controls such as autopilot, gear, flaps, trim, cabin seat belts, fuel, etc.  You can interface directly with these through the browser to control the aircraft.
 
-IMAGE
+![Autopilot.png]({{site.baseurl}}/Autopilot.png)
 
 It also gives you a ton of options around simulating emergencies such as an engine fire, electrical failure, hydraulic failure, etc.
 
-IMAGE
+![Failures.png]({{site.baseurl}}/Failures.png)
+
 
 ## How does the MSFS2020 Cockpit Companion work?
 
@@ -35,6 +36,23 @@ This interfaces with the simulator and displays the data in real time to you thr
 ## Can I fly my plane with this?
 
 Bad idea. The data refreshes every 2 seconds, so it's no way as responsive as the simulator; you will want to keep your primary flight instruments on the sim itself. This is really good for stuff which only needs to update in near-real-time (eg autopilot status, gear status, flaps, etc)
+
+## How do I install this?
+
+Install Python (version 3 or later) for Windows: https://www.python.org/downloads/windows/
+
+Install flask by typing the following at the command line:
+
+`pip install flask`
+
+Clone the code with:
+
+`git clone https://github.com/hankhank10/MSFS2020-cockpit-companion.git`
+
+
+
+
+
 
 ## How do I access this from another computer / my iPad?
 
