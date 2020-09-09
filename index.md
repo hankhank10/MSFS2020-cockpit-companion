@@ -12,9 +12,17 @@ If you answer yes, the MSFS2020 Cockpit Companion may be for you.
 
 ## What does it do?
 
-It give you a moving map of your aircraft's current location.  You can scroll around, have it follow your aircraft or not, set a variety of different map options and overlay with aviation data and weather (coming soon).
+It gives you a moving map of your aircraft's current location.  You can scroll around, have it follow your aircraft or not, set a variety of different map options and overlay with aviation data and weather (coming soon).
 
+IMAGE
 
+It also shows a variety of different secondary aircraft controls such as autopilot, gear, flaps, trim, cabin seat belts, fuel, etc.  You can interface directly with these through the browser to control the aircraft.
+
+IMAGE
+
+It also gives you a ton of options around simulating emergencies such as an engine fire, electrical failure, hydraulic failure, etc.
+
+IMAGE
 
 ## How does the MSFS2020 Cockpit Companion work?
 
@@ -22,7 +30,7 @@ It is a web wrapper for the [Python-SimConnect](https://github.com/odwdinc/Pytho
 
 In short, when you run the application it sets up a tiny lightweight web server on your computer which you can then access from any browser by navigating to http://localhost:5000/
 
-This interfaces with the simulator and displays the data in real time to you through the browser.
+This interfaces with the simulator and displays the data in real time to you through the browser. It uses Python, Flask, Bootstrap and Javascript.
 
 ## Can I fly my plane with this?
 
@@ -34,16 +42,11 @@ Run the application on the computer which is running MSFS2020. Find the IP addre
 
 ## I want to access this over the internet?
 
-You can. [NGROK](https://ngrok.com/) provides a really simple solution for exposing a local web server (which this is) to you over a tunnel through the internet. You will want to forward port 5000 to 
+You can. [NGROK](https://ngrok.com/) provides a really simple solution for exposing a local web server (which this is) to you remotely over a tunnel through the internet.
 
-## I want to set my friend's engine on fire while he's trying to land
+## I want to copilot with someone / set my friend's engine on fire
 
-NGROK is the answer here. 
-
-
-## I have something else running on port 5000
-
-## I want to set my friend's engine on fire
+NGROK is the answer here.
 
 ## I don't want your web interface, I want the data! Give me the data!
 
@@ -51,38 +54,19 @@ I've got you covered.
 
 As well as the graphical interface you can also get a ton of data directly over HTTP requests provided in JSON format.
 
-Try http://localhost:5000/
+Try http://localhost:5000/dataset/autopilot for an example.  Other endpoints are navigation, airspeed, compass, vertical_speed, fuel, flaps, throttle, gear and trim.
+
+## This sounds great. Take my money!
+
+No. It's free and open source. Also my bit of it (the web wrapper) is the easy bit so I won't be trying to sell this.
+
+If you do find this particularly valuable and want to say thanks then please consider making a small donation to the [Samaritans](https://www.samaritans.org/donate-now/), the [RAF Benevolent Fund](https://www.rafbf.org/ways-to-give/online-donation) or another charity.
+
+## This sounds terrible and I found a bug and it sucks
+
+Please [raise an issue on Github](https://github.com/hankhank10/MSFS2020-cockpit-companion/issues).
+
+Better still, if you know how this should be better or want to contribute then please fork my code, rewrite it and put in a pull request.
 
 
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/hankhank10/MSFS2020-cockpit-companion/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
