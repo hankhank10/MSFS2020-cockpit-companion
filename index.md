@@ -1,4 +1,4 @@
-## Who is is MSFS2020 Cockpit Companion for?
+# MSFS2020 Cockpit Companion
 
 Find it annoying to click around in the cockpit trying to set the autopilot heading when you're supposed to be flying the plane?
 
@@ -8,7 +8,7 @@ Struggling to fly over your house because MSFS2020 doesn't give you a real time 
 
 Wish you could set your engine on fire / generate an electrical failure / run out of fuel now and then for a challenge?
 
-If you answer yes, the MSFS2020 Cockpit Companion may be for you.
+If you answer yes, then **[MSFS2020 Cockpit Companion](https://github.com/hankhank10/MSFS2020-cockpit-companion/)** may be for you.
 
 ## What does it do?
 
@@ -27,7 +27,7 @@ It also gives you a ton of options around simulating emergencies such as an engi
 
 ## How does the MSFS2020 Cockpit Companion work?
 
-It is a web wrapper for the [Python-SimConnect](https://github.com/odwdinc/Python-SimConnect) library, which is itself a wrapper for the SimConnect library provided by Microsoft for getting access to the data in your Microsoft Flight Simulator 2020 application.
+It is a web wrapper for the [Python-SimConnect](https://github.com/odwdinc/Python-SimConnect) library, which is itself a wrapper for the SimConnect library which allows access and control of data in your Microsoft Flight Simulator 2020 application.
 
 In short, when you run the application it sets up a tiny lightweight web server on your computer which you can then access from any browser by navigating to http://localhost:5000/
 
@@ -39,28 +39,29 @@ Bad idea. The data refreshes every 2 seconds, so it's no way as responsive as th
 
 ## How do I install this?
 
-Install Python (version 3 or later) for Windows: https://www.python.org/downloads/windows/
+1. Install Python (version 3 or later) for Windows: [https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/)
 
-Install flask by typing the following at the command line:
+2. Install flask by typing the following at the command line: pip install flask
 
-`pip install flask`
+3. Clone the code with: git clone https://github.com/hankhank10/MSFS2020-cockpit-companion.git
 
-Clone the code with:
+4. Ensure MSFS2020 is running.
 
-`git clone https://github.com/hankhank10/MSFS2020-cockpit-companion.git`
+5. Open the directory which it installed into and run it with: python glass-server.py
 
+6. Navigate in your browser to [http://localhost:5000/](http://localhost:5000/)
 
+## That sounds like a lot of work. Can I just get a .exe to run?
 
-
-
+Maybe in the future. This is still in development for now.
 
 ## How do I access this from another computer / my iPad?
 
 Run the application on the computer which is running MSFS2020. Find the IP address of that computer. Open the browser on your second computer / iPad and navigate to http://ipaddressofthecomputer:5000/
 
-## I want to access this over the internet?
+## I want to access this over the internet rather than my LAN
 
-You can. [NGROK](https://ngrok.com/) provides a really simple solution for exposing a local web server (which this is) to you remotely over a tunnel through the internet.
+You can. [NGROK](https://ngrok.com/) provides a really simple solution for exposing a local web server (which this is) to you remotely over a tunnel through the internet. You will want to expose port 5000 and use the http rather than https tunnel.
 
 ## I want to copilot with someone / set my friend's engine on fire
 
@@ -76,9 +77,9 @@ Try http://localhost:5000/dataset/autopilot for an example.  Other endpoints are
 
 ## This sounds great. Take my money!
 
-No. It's free and open source. Also my bit of it (the web wrapper) is the easy bit so I won't be trying to sell this.
+No. It's free and open source. Also my bit of it (the web wrapper) is the easy bit so I won't be trying to sell this. The developers of [Python-SimConnect](https://github.com/odwdinc/Python-SimConnect) did all the hard work.
 
-If you do find this particularly valuable and want to say thanks then please consider making a small donation to the [Samaritans](https://www.samaritans.org/donate-now/), the [RAF Benevolent Fund](https://www.rafbf.org/ways-to-give/online-donation) or another charity.
+If you do find this particularly valuable and are desperate to say thanks then a small donation to the [Samaritans](https://www.samaritans.org/donate-now/), the [RAF Benevolent Fund](https://www.rafbf.org/ways-to-give/online-donation) or another charity which you find worthy will be more than sufficient.
 
 ## This sounds terrible and I found a bug and it sucks
 
@@ -86,5 +87,7 @@ Please [raise an issue on Github](https://github.com/hankhank10/MSFS2020-cockpit
 
 Better still, if you know how this should be better or want to contribute then please fork my code, rewrite it and put in a pull request.
 
+## Just give me the source code.
 
+Ok, ok: https://github.com/hankhank10/MSFS2020-cockpit-companion/
 
