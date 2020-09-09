@@ -91,3 +91,6 @@ Better still, if you know how this should be better or want to contribute then p
 
 Ok, ok: https://github.com/hankhank10/MSFS2020-cockpit-companion/
 
+## Are you affiliated with Microsoft? Do I get a full warranty with this code? Should I use this to fly my actual airplane in the real world?
+
+Obviously not, don't be silly. Unofficial fan project, no warranty. Educational purposes only. Stay safe.
