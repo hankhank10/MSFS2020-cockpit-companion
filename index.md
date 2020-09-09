@@ -24,7 +24,7 @@ It also shows a variety of different secondary aircraft controls such as autopil
 
 ![Autopilot.png]({{site.baseurl}}/Autopilot.png)
 
-It also gives you a ton of options around simulating emergencies such as an engine fire, electrical failure, hydraulic failure, etc.
+It also gives you options around simulating emergencies such as an engine fire, electrical failure, hydraulic failure, etc.
 
 ![Failures.png]({{site.baseurl}}/Failures.png)
 
