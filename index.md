@@ -26,7 +26,7 @@ It also shows a variety of different secondary aircraft controls such as autopil
 
 It also gives you options around simulating emergencies such as an engine fire, electrical failure, hydraulic failure, etc.
 
-![Failures.png]({{site.baseurl}}/Failures.png)
+![failures.png]({{site.baseurl}}/failures.png)
 
 
 ## How does the MSFS2020 Cockpit Companion work?
