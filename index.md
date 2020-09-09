@@ -47,7 +47,7 @@ Bad idea. The data refreshes every 2 seconds, so it's no way as responsive as th
 
 2. Install flask by typing the following at the command line: pip install flask
 
-3. Clone the code with: git clone https://github.com/hankhank10/MSFS2020-cockpit-companion.git
+3. Download or clone the repository into a new directory
 
 4. Ensure MSFS2020 is running.
 
