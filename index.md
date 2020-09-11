@@ -43,17 +43,7 @@ Bad idea. The data refreshes every 2 seconds, so it's no way as responsive as th
 
 ## How do I install this?
 
-1. Install Python (version 3 or later) for Windows: [https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/)
-
-2. Install flask by typing the following at the command line: pip install flask
-
-3. Download or clone the repository into a new directory
-
-4. Ensure MSFS2020 is running.
-
-5. Open the directory which it installed into and run it with: python glass-server.py
-
-6. Navigate in your browser to [http://localhost:5000/](http://localhost:5000/)
+Full installation instructions are on the **[Github Repo](https://github.com/hankhank10/MSFS2020-cockpit-companion/)**.
 
 ## That sounds like a lot of work. Can I just get a .exe to run?
 
