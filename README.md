@@ -20,9 +20,9 @@ Cockpit Companion provides a flask server running locally on port 5000 to delive
 
 - Download and install [Python 3+ for Windows](https://www.python.org/downloads/windows/)
 - At a command prompt install Flask: `pip install -U Flask`
-- At a command prompt install Python-SimConnect: `pip install Python-SimConnect`
+- At a command prompt install Python-SimConnect: `pip install SimConnect`
 - Download this repo into a fresh directory (eg `c:\MSFS2020-CC`)
-- Ensure that MSFS2020 is running
+- Ensure that MSFS2020 is running and that you are in an aircraft on a runway
 - Navigate to the directory you installed the repo to and run the program with `python glass_server.py`
 - Point your browser to [http://localhost:5000/](http://localhost:5000/)
 
