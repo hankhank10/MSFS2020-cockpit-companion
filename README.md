@@ -1,49 +1,39 @@
-[![PyPI version](https://badge.fury.io/py/SimConnect.svg)](https://badge.fury.io/py/SimConnect)
-# Python-SimConnect
+# MSFS-2020 Cockpit Companion
 
-Python interface for Microsoft Flight Simulator 2020 (MSFS2020) using SimConnect
+HTTP interface to view and control aircraft location and systems in Microsoft Flight Simulator 2020 (MSFS2020).
 
-This library allows Python scripts to read and set variables within MSFS2020 and trigger events within the simulation.
+![Map](https://msfs2020.cc/Autopilot.png])
 
-It also includes, as an example, "Cockpit Companion", a flask mini http server which runs locally. It provides a web UI with a moving map and simulation variables. It also provides simulation data in JSON format. Full documentation for this example can be found at [https://msfs2020.cc](https://msfs2020.cc).
+Full functionality explained at [https://msfs2020.cc](https://msfs2020.cc).
 
-## Python interface example
+Cockpit Companion is based on the [Python-SimConnect](https://github.com/odwdinc/Python-SimConnect) library which provides a python wrapper for SimConnect.
 
-````
-from SimConnect import *
+Cockpit Companion provides a flask server running locally on port 5000 to deliver either a user interface with a moving map and aircraft systems, or JSON output.
 
-# Create SimConnect link
-sm = SimConnect()
-aq = AircraftRequests(sm)
-ae = AircraftEvents(sm)
+## Requirements
 
-# Get the aircraft's current altitude
-altitude = aq.get("PLANE_ALTITUDE")
-altitude = altitude + 1000
+- [Flask](https://github.com/pallets/flask)
+- [Python-SimConnect](https://github.com/odwdinc/Python-SimConnect)
 
-# Set the aircraft's current altitude
-aq.set("PLANE_ALTITUDE", altitude)
+## Installation
 
-# Trigger a simple event
-event_to_trigger = ae.find("AP_MASTER")  # Toggles autopilot on or off
-event_to_trigger()
+- Download and install [Python 3+ for Windows](https://www.python.org/downloads/windows/)
+- At a command prompt install Flask: `pip install -U Flask`
+- At a command prompt install Python-SimConnect: `pip install Python-SimConnect`
+- Download this repo into a fresh directory (eg `c:\MSFS2020-CC`)
+- Ensure that MSFS2020 is running
+- Navigate to the directory you installed the repo to and run the program with `python glass_server.py`
+- Point your browser to [http://localhost:5000/](http://localhost:5000/)
 
-# Trigger an event while passing a variable
-target_altitude = 15000
-event_to_trigger = ae.find("AP_ALT_VAR_SET_ENGLISH")  # Sets AP autopilot hold level
-event_to_trigger(target_altitude)
-````
 
-## HTTP interface example
-
-Run `glass_server.py` using Python 3.
+## API documentation
 
 #### `http://localhost:5000`
 Method: GET
 
 Variables: None
 
-Output: Web interface with moving map and aircraft information
+Description: Web interface with moving map and aircraft information
 
 #### `http://localhost:5000/dataset/<dataset_name>`
 Method: GET
