@@ -2,7 +2,7 @@
 
 HTTP interface to view and control aircraft location and systems in Microsoft Flight Simulator 2020 (MSFS2020).
 
-![Map](https://msfs2020.cc/Autopilot.png])
+![Map](https://msfs2020.cc/Autopilot.png)
 
 Full functionality explained at [https://msfs2020.cc](https://msfs2020.cc).
 
@@ -12,6 +12,7 @@ Cockpit Companion provides a flask server running locally on port 5000 to delive
 
 ## Requirements
 
+- [Python 3+](https://www.python.org/downloads/windows/)
 - [Flask](https://github.com/pallets/flask)
 - [Python-SimConnect](https://github.com/odwdinc/Python-SimConnect)
 
