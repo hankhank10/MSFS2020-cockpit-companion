@@ -24,7 +24,7 @@ Cockpit Companion provides a flask server running locally on port 5000 to delive
 - Download this repo into a fresh directory (eg `c:\MSFS2020-CC`)
 - Ensure that MSFS2020 is running and that you are in an aircraft on a runway
 - Navigate to the directory you installed the repo to and run the program with `python glass_server.py`
-- Point your browser to [http://localhost:5000/](http://localhost:5000/)
+- Point Chrome or Firefox (not Internet Explore or Edge) to [http://localhost:5000/](http://localhost:5000/)
 
 
 ## API documentation
