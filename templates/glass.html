@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -18,7 +18,8 @@
 	<script src='https://unpkg.com/leaflet.marker.slideto@0.2.0/Leaflet.Marker.SlideTo.js'></script>
 
 	<!-- Fontawesome JS-->
-	<script src="https://kit.fontawesome.com/99043d701d.js" crossorigin="anonymous"></script>
+	<!-- script src="https://kit.fontawesome.com/99043d701d.js" crossorigin="anonymous"></script-->
+	<script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js"></script>
 
 	<!-- JQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -114,6 +115,16 @@
 				<li class="nav-item m-1">
 					<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseRadios" aria-expanded="true" aria-controls="collapseRadios" aria-label="Radios" data-microtip-position="bottom" role="tooltip">
 						<i class="fas fa-broadcast-tower"></i>
+					</button>
+				</li>
+				<li class="nav-item m-1">
+					<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseSwitches" aria-expanded="true" aria-controls="collapseSwitches" aria-label="Switches" data-microtip-position="bottom" role="tooltip">
+						<i class="fas fa-toggle-on"></i>
+					</button>
+				</li>
+				<li class="nav-item m-1">
+					<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseLights" aria-expanded="true" aria-controls="collapseLights" aria-label="Lights" data-microtip-position="bottom" role="tooltip">
+						<i class="fas fa-lightbulb"></i>
 					</button>
 				</li>
 				<li class="nav-item m-1">
@@ -257,6 +268,51 @@
 					</div>
 				</div>
 
+				<!-- SWITCHES -->
+				<div class="card">
+					<div id="collapseSwitches" class="collapse" aria-labelledby="collapseSwitches" data-parent="#accordionHUD">
+						<div class="card-body text-center">
+							<div class="row">
+								<div class="col-12">
+									<div class="card bg-light mb-3">
+										<div class="card-body">
+											<button onclick="triggerSimEvent('TOGGLE_ELECT_FUEL_PUMP')" id="fuel_pump" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Fuel pump</button>
+											<button onclick="triggerSimEvent('ANTI_ICE_TOGGLE')" id="anti-ice" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Anti-ice</button>
+											<button onclick="triggerSimEvent('PITOT_HEAT_TOGGLE')" id="pitot-heat" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Pitot heat</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- LIGHTS -->
+				<div class="card">
+					<div id="collapseLights" class="collapse" aria-labelledby="collapseLights" data-parent="#accordionHUD">
+						<div class="card-body text-center">
+							<div class="row">
+								<div class="col-12">
+									<div class="card bg-light mb-3">
+										<div class="card-body">
+											<button onclick="triggerSimEvent('STROBES_TOGGLE')" id="strobes_toggle" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Strobe</button>
+											<button onclick="triggerSimEvent('LANDING_LIGHTS_TOGGLE')" id="landing_lights_toggle" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Landing lights</button>
+											<button onclick="triggerSimEvent('TOGGLE_NAV_LIGHTS')" id="toggle_nav_lights" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Nav lights</button>
+											<button onclick="triggerSimEvent('TOGGLE_TAXI_LIGHTS')" id="toggle_taxi_lights" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Taxi lights</button>
+											<button onclick="triggerSimEvent('TOGGLE_BEACON_LIGHTS')" id="toggle_beacon_lights" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Beacon lights</button>
+											<button onclick="triggerSimEvent('TOGGLE_LOGO_LIGHTS')" id="toggle_logo_lights" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Logo lights</button>
+											<button onclick="triggerSimEvent('TOGGLE_RECOGNITION_LIGHTS')" id="toggle_recognition_lights" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Recognition lights</button>
+											<button onclick="triggerSimEvent('TOGGLE_WING_LIGHTS')" id="toggle_wing_lights" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Wing lights</button>
+											<button onclick="triggerSimEvent('TOGGLE_CABIN_LIGHTS')" id="toggle_cabin_lights" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Cabin lights</button>
+											<button onclick="triggerSimEvent('TOGGLE_PANEL_LIGHTS')" id="toggle_panel_lights" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Panel lights</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<!-- CONTROL SURFACES -->
 				<div class="card">
 					<div id="collapseControlSurfaces" class="collapse" aria-labelledby="collapseControlSurfaces" data-parent="#accordionHUD">
@@ -277,10 +333,10 @@
 
 											<table>
 												<tbody>
-												<tr>
-													<td><div id="flaps-slider" class="slider vertical-slider"></div></td>
-													<td><span id=flaps-handle-pct>?</span></td>
-												</tr>
+													<tr>
+														<td><div id="flaps-slider" class="slider vertical-slider"></div></td>
+														<td><span id=flaps-handle-pct>?</span></td>
+													</tr>
 												</tbody>
 											</table>
 
@@ -293,26 +349,26 @@
 											<h7 class="card-title">Elevator Trim (%)</h7><br><br>
 											<table>
 												<tbody>
-												<tr>
-													<td><div id="elevator-trim-slider" class="slider vertical-slider"></div></td>
-													<td><span id=elevator-trim-pct>?</span></td>
-												</tr>
+													<tr>
+														<td><div id="elevator-trim-slider" class="slider vertical-slider"></div></td>
+														<td><span id=elevator-trim-pct>?</span></td>
+													</tr>
 												</tbody>
 											</table>
 										</div>
 									</div>
 								</div>
 								<!--
-								<div class="col-12">
-									<div class="card bg-light">
-										<div class="card-body"">
-											<h7 class="card-title">Rudder Trim (%)</h7>
-											<div id="rudder-trim-slider" class="slider mt-3"></div
-											<div class="text-center"><span style="text-align: center" id=rudder-trim-pct>?</span></div>
-										</div>
-									</div>
-								</div>
-								-->
+					<div class="col-12">
+						<div class="card bg-light">
+							<div class="card-body"">
+								<h7 class="card-title">Rudder Trim (%)</h7>
+								<div id="rudder-trim-slider" class="slider mt-3"></div
+								<div class="text-center"><span style="text-align: center" id=rudder-trim-pct>?</span></div>
+							</div>
+						</div>
+					</div>
+					-->
 
 							</div>
 						</div>
@@ -416,7 +472,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<!-- RADIOS -->
 				<div class="card">
 					<div id="collapseRadios" class="collapse" aria-labelledby="collapseRadios" data-parent="#accordionHUD">

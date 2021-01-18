@@ -6,6 +6,21 @@ let airspeed;
 let latitude;
 let longitude;
 
+let fuel_pump;
+let pitot_heat;
+let panel_anti_ice_sw;
+
+let light_strobe;
+let light_landing;
+let light_nav;
+let light_taxi;
+let light_beacon;
+let light_logo;
+let light_recognition;
+let light_wing;
+let light_cabin;
+let light_panel;
+
 let autopilot_master;
 let autopilot_nav_selected;
 let autopilot_wing_leveler;
@@ -45,6 +60,8 @@ window.setInterval(function(){
 function getSimulatorData() {
     $.getJSON($SCRIPT_ROOT + '/ui', {}, function(data) {
 
+        console.log(data)
+
         //Navigation
         altitude = data.ALTITUDE;
         vertical_speed = data.VERTICAL_SPEED;
@@ -52,6 +69,23 @@ function getSimulatorData() {
         airspeed = data.AIRSPEED_INDICATE;
         latitude = data.LATITUDE;
         longitude = data.LONGITUDE;
+
+        // Switches
+        panel_anti_ice_sw = data.PANEL_ANTI_ICE_SWITCH
+        pitot_heat = data.PITOT_HEAT
+        fuel_pump = data.GENERAL_ENG_FUEL_PUMP_SWITCH
+
+        // Lights
+        light_strobe = data.LIGHT_STROBE
+        light_landing = data.LIGHT_LANDING
+        light_nav = data.LIGHT_NAV
+        light_taxi = data.LIGHT_TAXI
+        light_beacon = data.LIGHT_BEACON
+        light_logo = data.LIGHT_LOGO
+        light_recognition = data.LIGHT_RECOGNITION
+        light_wing = data.LIGHT_WING
+        light_cabin = data.LIGHT_CABIN
+        light_panel = data.LIGHT_PANEL
 
         //Fuel
         fuel_percentage = data.FUEL_PERCENTAGE;
@@ -137,6 +171,77 @@ function displayData() {
 
     //$("#rudder-trim-pct").text(rudder_trim_pct);
     //$("#rudder-trim-slider").slider({values: [rudder_trim_pct]})
+
+
+    //Switches
+    if (fuel_pump === 1) {
+        $("#fuel_pump").removeClass("btn-outline-danger").addClass("btn-danger").html("Fuel pump on");
+    } else {
+        $("#fuel_pump").removeClass("btn-danger").addClass("btn-outline-danger").html("Fuel pump off");
+    }
+    if (panel_anti_ice_sw === 1) {
+        $("#anti-ice").removeClass("btn-outline-danger").addClass("btn-danger").html("Anti-ice on");
+    } else {
+        $("#anti-ice").removeClass("btn-danger").addClass("btn-outline-danger").html("Anti-ice off");
+    }
+    if (pitot_heat === 1) {
+        $("#pitot-heat").removeClass("btn-outline-danger").addClass("btn-danger").html("Pitot heat on");
+    } else {
+        $("#pitot-heat").removeClass("btn-danger").addClass("btn-outline-danger").html("Pitot heat off");
+    }
+
+
+    //Lights
+    if (light_strobe === 1) {
+        $("#strobes_toggle").removeClass("btn-outline-danger").addClass("btn-danger").html("Strobes on");
+    } else {
+        $("#strobes_toggle").removeClass("btn-danger").addClass("btn-outline-danger").html("Strobes off");
+    }
+    if (light_landing === 1) {
+        $("#landing_lights_toggle").removeClass("btn-outline-danger").addClass("btn-danger").html("Landing lights on");
+    } else {
+        $("#landing_lights_toggle").removeClass("btn-danger").addClass("btn-outline-danger").html("Landing lights off");
+    }
+    if (light_nav === 1) {
+        $("#toggle_nav_lights").removeClass("btn-outline-danger").addClass("btn-danger").html("Nav lights on");
+    } else {
+        $("#toggle_nav_lights").removeClass("btn-danger").addClass("btn-outline-danger").html("Nav lights off");
+    }
+    if (light_taxi === 1) {
+        $("#toggle_taxi_lights").removeClass("btn-outline-danger").addClass("btn-danger").html("Taxi lights on");
+    } else {
+        $("#toggle_taxi_lights").removeClass("btn-danger").addClass("btn-outline-danger").html("Taxi lights off");
+    }
+    if (light_beacon === 1) {
+        $("#toggle_beacon_lights").removeClass("btn-outline-danger").addClass("btn-danger").html("Beacon lights on");
+    } else {
+        $("#toggle_beacon_lights").removeClass("btn-danger").addClass("btn-outline-danger").html("Beacon lights off");
+    }
+    if (light_logo === 1) {
+        $("#toggle_logo_lights").removeClass("btn-outline-danger").addClass("btn-danger").html("Logo lights on");
+    } else {
+        $("#toggle_logo_lights").removeClass("btn-danger").addClass("btn-outline-danger").html("Logo lights off");
+    }
+    if (light_recognition === 1) {
+        $("#toggle_recognition_lights").removeClass("btn-outline-danger").addClass("btn-danger").html("Recognition lights on");
+    } else {
+        $("#toggle_recognition_lights").removeClass("btn-danger").addClass("btn-outline-danger").html("Recognition lights off");
+    }
+    if (light_wing === 1) {
+        $("#toggle_wing_lights").removeClass("btn-outline-danger").addClass("btn-danger").html("Wing lights on");
+    } else {
+        $("#toggle_wing_lights").removeClass("btn-danger").addClass("btn-outline-danger").html("Wing lights off");
+    }
+    if (light_cabin === 1) {
+        $("#toggle_cabin_lights").removeClass("btn-outline-danger").addClass("btn-danger").html("Cabin lights on");
+    } else {
+        $("#toggle_cabin_lights").removeClass("btn-danger").addClass("btn-outline-danger").html("Cabin lights off");
+    }
+    if (light_panel === 1) {
+        $("#toggle_panel_lights").removeClass("btn-outline-danger").addClass("btn-danger").html("Panel lights on");
+    } else {
+        $("#toggle_panel_lights").removeClass("btn-danger").addClass("btn-outline-danger").html("Panel lights off");
+    }
 
     //Cabin
     if (cabin_seatbelts_alert_switch === 1){
