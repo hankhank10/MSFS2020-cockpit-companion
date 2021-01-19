@@ -278,15 +278,17 @@ function toggleFollowPlane() {
 }
 
 function updateMap() {
-    var pos = L.latLng(latitude, longitude);
+    if ((typeof latitude === 'undefined') || (typeof longitude === 'undefined')) {
+        return
+    }
 
-    marker.slideTo(	pos, {
+    marker.slideTo(	[latitude, longitude], {
         duration: 1500,
     });
     marker.setRotationAngle(compass);
 
     if (followPlane === true) {
-        map.panTo(pos);
+        map.panTo([latitude, longitude]);
     }
 }
 
