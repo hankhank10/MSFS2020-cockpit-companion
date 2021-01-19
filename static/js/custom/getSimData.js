@@ -169,8 +169,8 @@ function displayData() {
     $("#elevator-trim-pct").text(elevator_trim_pct);
     $("#elevator-trim-slider").slider({values: [elevator_trim_pct_reversed]})
 
-    //$("#rudder-trim-pct").text(rudder_trim_pct);
-    //$("#rudder-trim-slider").slider({values: [rudder_trim_pct]})
+    $("#rudder-trim-pct").text(rudder_trim_pct);
+    $("#rudder-trim-slider").slider({values: [rudder_trim_pct]})
 
 
     //Switches
