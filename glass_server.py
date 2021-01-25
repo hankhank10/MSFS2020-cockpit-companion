@@ -182,6 +182,17 @@ request_light = [
 	'LIGHT_CABIN',
 ]
 
+request_comms = [
+	'COM_ACTIVE_FREQUENCY:1', 
+	'COM_STANDBY_FREQUENCY:1',
+	'COM_ACTIVE_FREQUENCY:2', 
+	'COM_STANDBY_FREQUENCY:2',
+	'NAV_ACTIVE_FREQUENCY:1', 
+	'NAV_STANDBY_FREQUENCY:1',
+	'NAV_ACTIVE_FREQUENCY:2', 
+	'NAV_STANDBY_FREQUENCY:2',
+]
+
 request_gear = [
 	'IS_GEAR_RETRACTABLE',  # True if gear can be retracted
 	'IS_GEAR_SKIS',  # True if landing gear is skis
@@ -397,6 +408,16 @@ def output_ui_variables():
 	ui_friendly_dictionary["PITOT_HEAT"] = aq.get("PITOT_HEAT")
 	ui_friendly_dictionary["GENERAL_ENG_FUEL_PUMP_SWITCH"] = aq.get("GENERAL_ENG_FUEL_PUMP_SWITCH:1")
 	
+	# Comms
+	ui_friendly_dictionary["COM_ACTIVE_FREQUENCY1"] = aq.get("COM_ACTIVE_FREQUENCY:1")
+	ui_friendly_dictionary["COM_STANDBY_FREQUENCY1"] = aq.get("COM_STANDBY_FREQUENCY:1")
+	ui_friendly_dictionary["COM_ACTIVE_FREQUENCY2"] = aq.get("COM_ACTIVE_FREQUENCY:2")
+	ui_friendly_dictionary["COM_STANDBY_FREQUENCY2"] = aq.get("COM_STANDBY_FREQUENCY:2")
+	ui_friendly_dictionary["NAV_ACTIVE_FREQUENCY1"] = aq.get("NAV_ACTIVE_FREQUENCY:1")
+	ui_friendly_dictionary["NAV_STANDBY_FREQUENCY1"] = aq.get("NAV_STANDBY_FREQUENCY:1")
+	ui_friendly_dictionary["NAV_ACTIVE_FREQUENCY2"] = aq.get("NAV_ACTIVE_FREQUENCY:2")
+	ui_friendly_dictionary["NAV_STANDBY_FREQUENCY2"] = aq.get("NAV_STANDBY_FREQUENCY:2")
+
 	# Aircraft
 	ui_friendly_dictionary["ATC_TYPE"] = str(aq.get("ATC_TYPE"))
 	ui_friendly_dictionary["ATC_MODEL"] = str(aq.get("ATC_MODEL"))

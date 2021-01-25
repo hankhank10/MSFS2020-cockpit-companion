@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.3/rangeslider.css" integrity="sha512-FkNnPJevAkIHB3NqUiMadWNcoMcOCPQUMyF55JeAFZmPcSR6wK6TgZ0qL6bMrRqGNaaVS8CAwBYceORhdTUILQ==" crossorigin="anonymous" />
 
 	<!-- Leaflet CSS and JS -->
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
 	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 	<script src="https://cdn.jsdelivr.net/npm/leaflet-rotatedmarker@0.2.0/leaflet.rotatedMarker.min.js"></script>
 	<script src="/static/vendor/leaflet-providers/leaflet-providers.js"></script>
@@ -35,6 +35,11 @@
 	<!-- Sweetalert2 -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+	<!-- switchbutton -->
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.5.0-rc1/jquery.mobile-1.5.0-rc1.min.css" />
+	<script src="https://code.jquery.com/mobile/1.5.0-rc1/jquery.mobile-1.5.0-rc1.min.js"></script>
+
+
 	<!-- Microtip tooltips -->
 	<link rel="stylesheet" href="https://unpkg.com/microtip/microtip.css">
 
@@ -50,13 +55,16 @@
 			margin: 0;
 			padding: 0;
 		}
+
 		body {
 			display: flex;
 			flex-direction: column;
 		}
+
 		.sim-input-field {
 			width: 125px;
 		}
+
 		.vertical-slider {
 			height: 150px;
 			margin-left: 15px;
@@ -68,7 +76,19 @@
 			opacity: 1;
 			top: -30px;
 		}
+
+        .ui-mobile label {
+            display: inline;
+        }
 	</style>
+
+
+	<script>
+		$(document).ready(function () {
+
+		});
+
+	</script>
 </head>
 
 <body>
@@ -82,6 +102,7 @@
 				<button id=followModeButton class="btn btn-primary btn-sm" type="button" onclick="toggleFollowPlane()">
 					<i class="fas fa-location-arrow"></i> <span id=followMode>Moving map enabled</span>
 				</button>
+				<input onchange="mapSwitch()" type="checkbox" data-role="flipswitch" id="map_switch" checked="checked" />
 			</ul>
 		</div>
 		<div class="mx-auto order-0">
@@ -294,18 +315,48 @@
 							<div class="row">
 								<div class="col-12">
 									<div class="card bg-light mb-3">
-										<div class="card-body">
-											<button onclick="triggerSimEvent('STROBES_TOGGLE')" id="strobes_toggle" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Strobe</button>
-											<button onclick="triggerSimEvent('LANDING_LIGHTS_TOGGLE')" id="landing_lights_toggle" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Landing lights</button>
-											<button onclick="triggerSimEvent('TOGGLE_NAV_LIGHTS')" id="toggle_nav_lights" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Nav lights</button>
-											<button onclick="triggerSimEvent('TOGGLE_TAXI_LIGHTS')" id="toggle_taxi_lights" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Taxi lights</button>
-											<button onclick="triggerSimEvent('TOGGLE_BEACON_LIGHTS')" id="toggle_beacon_lights" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Beacon lights</button>
-											<button onclick="triggerSimEvent('TOGGLE_LOGO_LIGHTS')" id="toggle_logo_lights" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Logo lights</button>
-											<button onclick="triggerSimEvent('TOGGLE_RECOGNITION_LIGHTS')" id="toggle_recognition_lights" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Recognition lights</button>
-											<button onclick="triggerSimEvent('TOGGLE_WING_LIGHTS')" id="toggle_wing_lights" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Wing lights</button>
-											<button onclick="triggerSimEvent('TOGGLE_CABIN_LIGHTS')" id="toggle_cabin_lights" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Cabin lights</button>
-											<button onclick="triggerSimEvent('TOGGLE_PANEL_LIGHTS')" id="toggle_panel_lights" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Panel lights</button>
-										</div>
+										<div class="card-body" style="text-align:left">
+											<div style="display:block">
+												<input onchange="triggerSimEvent('STROBES_TOGGLE')" type="checkbox" data-role="flipswitch" id="strobes_toggle" checked="checked" />
+												<label for="strobes_toggle">Strobe</label>
+											</div>
+											<div style="display:block">
+												<input onchange="triggerSimEvent('LANDING_LIGHTS_TOGGLE')" type="checkbox" data-role="flipswitch" id="landing_lights_toggle" checked="checked" />
+												<label for="landing_lights_toggle">Landing</label>
+											</div>
+											<div style="display:block">
+												<input onchange="triggerSimEvent('TOGGLE_NAV_LIGHTS')" type="checkbox" data-role="flipswitch" id="toggle_nav_lights" checked="checked" />
+												<label for="toggle_nav_lights">Nav</label>
+											</div>
+											<div style="display:block">
+												<input onchange="triggerSimEvent('TOGGLE_TAXI_LIGHTS')" type="checkbox" data-role="flipswitch" id="toggle_taxi_lights" checked="checked" />
+												<label for="toggle_taxi_lights">Taxi</label>
+											</div>
+											<div style="display:block">
+												<input onchange="triggerSimEvent('TOGGLE_BEACON_LIGHTS')" type="checkbox" data-role="flipswitch" id="toggle_beacon_lights" checked="checked" />
+												<label for="toggle_beacon_lights">Beacon</label>
+											</div>
+											<div style="display:block">
+												<input onchange="triggerSimEvent('TOGGLE_LOGO_LIGHTS')" type="checkbox" data-role="flipswitch" id="toggle_logo_lights" checked="checked" />
+												<label for="toggle_logo_lights">Logo</label>
+											</div>
+											<div style="display:block">
+												<input onchange="triggerSimEvent('TOGGLE_RECOGNITION_LIGHTS')" type="checkbox" data-role="flipswitch" id="toggle_recognition_lights" checked="checked" />
+												<label for="toggle_recognition_lights">Recognition</label>
+											</div>
+											<div style="display:block">
+												<input onchange="triggerSimEvent('TOGGLE_WING_LIGHTS')" type="checkbox" data-role="flipswitch" id="toggle_wing_lights" checked="checked" />
+												<label for="toggle_wing_lights">Wing</label>
+											</div>
+											<div style="display:block">
+												<input onchange="triggerSimEvent('TOGGLE_CABIN_LIGHTS')" type="checkbox" data-role="flipswitch" id="toggle_cabin_lights" checked="checked" />
+												<label for="toggle_cabin_lights">Cabin</label>
+											</div>
+											<div style="display:block">
+												<input onchange="triggerSimEvent('TOGGLE_PANEL_LIGHTS')" type="checkbox" data-role="flipswitch" id="toggle_panel_lights" checked="checked" />
+												<label for="toggle_panel_lights">Panel</label>
+											</div>
+											</div>
 									</div>
 								</div>
 							</div>
@@ -482,7 +533,13 @@
 
 											<table style="border-collapse:separate; border-spacing:0 5px; vertical-align: center">
 												<tr>
-													<td>COM1 Frequency</td>
+													<td colspan="2">COM1</td>
+												</tr>
+												<tr>
+													<td width="50%">Active: <input type="text" value="118.200" size="8" style="width:8em" id="com1_active" /></td>
+													<td width="50%">Stby: <input type="text" value="119.450" size="8" style="width:8em" id="com1_stby" /></td>
+												</tr>
+												<tr>
 													<td colspan="2">
 														<button onclick="triggerSimEvent ('COM_RADIO_WHOLE_DEC', 1, true)" id="autopilot-com-freq" type="button" class="btn m-1 btn-danger" title="Decrease COM1 frequency by 1 MHz" style="width:55px">&lt;&lt;</button>
 														<button onclick="triggerSimEvent ('COM_RADIO_FRACT_DEC', 1, true)" id="autopilot-com-freq" type="button" class="btn m-1 btn-danger" title="Decrease COM1 frequency by 25 kHz" style="width:55px">&lt;</button>
@@ -493,7 +550,13 @@
 												</tr>
 
 												<tr>
-													<td>COM2 Frequency</td>
+													<td colspan="2">COM2</td>
+												</tr>
+												<tr>
+													<td>Active: <input type="text" value="118.200" size="8" style="width:8em" id="com2_active" /></td>
+													<td>Stby: <input type="text" value="119.450" size="8" style="width:8em" id="com2_stby" /></td>
+												</tr>
+												<tr>
 													<td colspan="2">
 														<button onclick="triggerSimEvent ('COM2_RADIO_WHOLE_DEC', 1, true)" id="autopilot-com-freq" type="button" class="btn m-1 btn-danger" title="Decrease COM2 frequency by 1 MHz" style="width:55px">&lt;&lt;</button>
 														<button onclick="triggerSimEvent ('COM2_RADIO_FRACT_DEC', 1, true)" id="autopilot-com-freq" type="button" class="btn m-1 btn-danger" title="Decrease COM2 frequency by 25 kHz" style="width:55px">&lt;</button>
@@ -504,7 +567,13 @@
 												</tr>
 
 												<tr>
-													<td>NAV1 Frequency</td>
+													<td colspan="2">NAV1</td>
+												</tr>
+												<tr>
+													<td>Active: <input type="text" value="118.200" size="8" style="width:8em" id="nav1_active" /></td>
+													<td>Stby: <input type="text" value="119.450" size="8" style="width:8em" id="nav1_stby" /></td>
+												</tr>
+												<tr>
 													<td colspan="2">
 														<button onclick="triggerSimEvent ('NAV1_RADIO_WHOLE_DEC', 1, true)" id="autopilot-com-freq" type="button" class="btn m-1 btn-danger" title="Decrease NAV1 frequency by 1 MHz" style="width:55px">&lt;&lt;</button>
 														<button onclick="triggerSimEvent ('NAV1_RADIO_FRACT_DEC', 1, true)" id="autopilot-com-freq" type="button" class="btn m-1 btn-danger" title="Decrease NAV1 frequency by 25 kHz" style="width:55px">&lt;</button>
@@ -515,7 +584,13 @@
 												</tr>
 
 												<tr>
-													<td>NAV2 Frequency</td>
+													<td colspan="2">NAV2</td>
+												</tr>
+												<tr>
+													<td>Active: <input type="text" value="118.200" size="8" style="width:8em" id="nav2_active" /></td>
+													<td>Stby: <input type="text" value="119.450" size="8" style="width:8em" id="nav2_stby" /></td>
+												</tr>
+												<tr>
 													<td colspan="2">
 														<button onclick="triggerSimEvent ('NAV2_RADIO_WHOLE_DEC', 1, true)" id="autopilot-com-freq" type="button" class="btn m-1 btn-danger" title="Decrease NAV2 frequency by 1 MHz" style="width:55px">&lt;&lt;</button>
 														<button onclick="triggerSimEvent ('NAV2_RADIO_FRACT_DEC', 1, true)" id="autopilot-com-freq" type="button" class="btn m-1 btn-danger" title="Decrease NAV2 frequency by 25 kHz" style="width:55px">&lt;</button>
@@ -616,7 +691,7 @@
 </script>
 
 <script>
-    $("#elevator-trim-slider")
+    /*$("#elevator-trim-slider")
         .slider({
             min: -30,
             max: 30,
@@ -626,8 +701,8 @@
             step: "10",
             first: "pip",
             last: "pip"
-        });
-
+        });*/
+	/*
     $("#flaps-slider")
         .slider({
             min: -100,
@@ -639,8 +714,8 @@
             step: "50",
             first: "pip",
             last: "pip"
-        });
-
+        });*/
+	/*
     $("#rudder-trim-slider")
         .slider({
             min: -50,
@@ -652,7 +727,7 @@
             first: "pip",
             last: "pip"
         });
-
+		*/
 </script>
 
 <!--Boostrap JS-->
