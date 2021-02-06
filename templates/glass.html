@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -11,14 +11,15 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.3/rangeslider.css" integrity="sha512-FkNnPJevAkIHB3NqUiMadWNcoMcOCPQUMyF55JeAFZmPcSR6wK6TgZ0qL6bMrRqGNaaVS8CAwBYceORhdTUILQ==" crossorigin="anonymous" />
 
 	<!-- Leaflet CSS and JS -->
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
 	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 	<script src="https://cdn.jsdelivr.net/npm/leaflet-rotatedmarker@0.2.0/leaflet.rotatedMarker.min.js"></script>
 	<script src="/static/vendor/leaflet-providers/leaflet-providers.js"></script>
 	<script src='https://unpkg.com/leaflet.marker.slideto@0.2.0/Leaflet.Marker.SlideTo.js'></script>
 
 	<!-- Fontawesome JS-->
-	<script src="https://kit.fontawesome.com/99043d701d.js" crossorigin="anonymous"></script>
+	<!-- script src="https://kit.fontawesome.com/99043d701d.js" crossorigin="anonymous"></script-->
+	<script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js"></script>
 
 	<!-- JQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -33,6 +34,11 @@
 
 	<!-- Sweetalert2 -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+	<!-- switchbutton -->
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.5.0-rc1/jquery.mobile-1.5.0-rc1.min.css" />
+	<script src="https://code.jquery.com/mobile/1.5.0-rc1/jquery.mobile-1.5.0-rc1.min.js"></script>
+
 
 	<!-- Microtip tooltips -->
 	<link rel="stylesheet" href="https://unpkg.com/microtip/microtip.css">
@@ -49,13 +55,16 @@
 			margin: 0;
 			padding: 0;
 		}
+
 		body {
 			display: flex;
 			flex-direction: column;
 		}
+
 		.sim-input-field {
 			width: 125px;
 		}
+
 		.vertical-slider {
 			height: 150px;
 			margin-left: 15px;
@@ -67,7 +76,19 @@
 			opacity: 1;
 			top: -30px;
 		}
+
+        .ui-mobile label {
+            display: inline;
+        }
 	</style>
+
+
+	<script>
+		$(document).ready(function () {
+
+		});
+
+	</script>
 </head>
 
 <body>
@@ -81,6 +102,7 @@
 				<button id=followModeButton class="btn btn-primary btn-sm" type="button" onclick="toggleFollowPlane()">
 					<i class="fas fa-location-arrow"></i> <span id=followMode>Moving map enabled</span>
 				</button>
+				<input onchange="mapSwitch()" type="checkbox" data-role="flipswitch" id="map_switch" checked="checked" />
 			</ul>
 		</div>
 		<div class="mx-auto order-0">
@@ -117,6 +139,16 @@
 					</button>
 				</li>
 				<li class="nav-item m-1">
+					<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseSwitches" aria-expanded="true" aria-controls="collapseSwitches" aria-label="Switches" data-microtip-position="bottom" role="tooltip">
+						<i class="fas fa-toggle-on"></i>
+					</button>
+				</li>
+				<li class="nav-item m-1">
+					<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseLights" aria-expanded="true" aria-controls="collapseLights" aria-label="Lights" data-microtip-position="bottom" role="tooltip">
+						<i class="fas fa-lightbulb"></i>
+					</button>
+				</li>
+				<li class="nav-item m-1">
 					<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseCabin" aria-expanded="true" aria-controls="collapseCabin" aria-label="Cabin" data-microtip-position="bottom" role="tooltip">
 						<i class="fas fa-users"></i>
 					</button>
@@ -137,7 +169,7 @@
 
 
 	<div class="row p-2" style="height: 85vh">
-		<div class="col-sm-7 col-xl-8 no-gutters collapse show p-0" style="background-color: grey;" id="map_column" style="position: relative; height=100%;">
+		<div class="col-sm-7 col-xl-8 no-gutters collapse show p-0" style="background-color: grey; position: relative; height:100%;" id="map_column">
 			<div id = "map" style = "height: 100%; width: 100%;"></div>
 		</div>
 
@@ -211,7 +243,7 @@
 
 				<!-- EMERGENCY -->
 				<div class="card">
-					<div id="collapseEmergency" class="collapse" aria-labelledby="collapseFuel" data-parent="#accordionHUD">
+					<div id="collapseEmergency" class="collapse" aria-labelledby="collapseEmergency" data-parent="#accordionHUD">
 						<div class="card-body text-center">
 							<div class="row">
 								<div class="col-12">
@@ -257,6 +289,81 @@
 					</div>
 				</div>
 
+				<!-- SWITCHES -->
+				<div class="card">
+					<div id="collapseSwitches" class="collapse" aria-labelledby="collapseSwitches" data-parent="#accordionHUD">
+						<div class="card-body text-center">
+							<div class="row">
+								<div class="col-12">
+									<div class="card bg-light mb-3">
+										<div class="card-body">
+											<button onclick="triggerSimEvent('TOGGLE_ELECT_FUEL_PUMP')" id="fuel_pump" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Fuel pump</button>
+											<button onclick="triggerSimEvent('ANTI_ICE_TOGGLE')" id="anti-ice" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Anti-ice</button>
+											<button onclick="triggerSimEvent('PITOT_HEAT_TOGGLE')" id="pitot-heat" type="button" class="btn mt-1 btn-block btn-outline-danger btn-lg">Pitot heat</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- LIGHTS -->
+				<div class="card">
+					<div id="collapseLights" class="collapse" aria-labelledby="collapseLights" data-parent="#accordionHUD">
+						<div class="card-body text-center">
+							<div class="row">
+								<div class="col-12">
+									<div class="card bg-light mb-3">
+										<div class="card-body" style="text-align:left">
+											<div style="display:block">
+												<input onchange="triggerSimEvent('STROBES_TOGGLE')" type="checkbox" data-role="flipswitch" id="strobes_toggle" checked="checked" />
+												<label for="strobes_toggle">Strobe</label>
+											</div>
+											<div style="display:block">
+												<input onchange="triggerSimEvent('LANDING_LIGHTS_TOGGLE')" type="checkbox" data-role="flipswitch" id="landing_lights_toggle" checked="checked" />
+												<label for="landing_lights_toggle">Landing</label>
+											</div>
+											<div style="display:block">
+												<input onchange="triggerSimEvent('TOGGLE_NAV_LIGHTS')" type="checkbox" data-role="flipswitch" id="toggle_nav_lights" checked="checked" />
+												<label for="toggle_nav_lights">Nav</label>
+											</div>
+											<div style="display:block">
+												<input onchange="triggerSimEvent('TOGGLE_TAXI_LIGHTS')" type="checkbox" data-role="flipswitch" id="toggle_taxi_lights" checked="checked" />
+												<label for="toggle_taxi_lights">Taxi</label>
+											</div>
+											<div style="display:block">
+												<input onchange="triggerSimEvent('TOGGLE_BEACON_LIGHTS')" type="checkbox" data-role="flipswitch" id="toggle_beacon_lights" checked="checked" />
+												<label for="toggle_beacon_lights">Beacon</label>
+											</div>
+											<div style="display:block">
+												<input onchange="triggerSimEvent('TOGGLE_LOGO_LIGHTS')" type="checkbox" data-role="flipswitch" id="toggle_logo_lights" checked="checked" />
+												<label for="toggle_logo_lights">Logo</label>
+											</div>
+											<div style="display:block">
+												<input onchange="triggerSimEvent('TOGGLE_RECOGNITION_LIGHTS')" type="checkbox" data-role="flipswitch" id="toggle_recognition_lights" checked="checked" />
+												<label for="toggle_recognition_lights">Recognition</label>
+											</div>
+											<div style="display:block">
+												<input onchange="triggerSimEvent('TOGGLE_WING_LIGHTS')" type="checkbox" data-role="flipswitch" id="toggle_wing_lights" checked="checked" />
+												<label for="toggle_wing_lights">Wing</label>
+											</div>
+											<div style="display:block">
+												<input onchange="triggerSimEvent('TOGGLE_CABIN_LIGHTS')" type="checkbox" data-role="flipswitch" id="toggle_cabin_lights" checked="checked" />
+												<label for="toggle_cabin_lights">Cabin</label>
+											</div>
+											<div style="display:block">
+												<input onchange="triggerSimEvent('TOGGLE_PANEL_LIGHTS')" type="checkbox" data-role="flipswitch" id="toggle_panel_lights" checked="checked" />
+												<label for="toggle_panel_lights">Panel</label>
+											</div>
+											</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<!-- CONTROL SURFACES -->
 				<div class="card">
 					<div id="collapseControlSurfaces" class="collapse" aria-labelledby="collapseControlSurfaces" data-parent="#accordionHUD">
@@ -277,10 +384,10 @@
 
 											<table>
 												<tbody>
-												<tr>
-													<td><div id="flaps-slider" class="slider vertical-slider"></div></td>
-													<td><span id=flaps-handle-pct>?</span></td>
-												</tr>
+													<tr>
+														<td><div id="flaps-slider" class="slider vertical-slider"></div></td>
+														<td><span id=flaps-handle-pct>?</span></td>
+													</tr>
 												</tbody>
 											</table>
 
@@ -293,26 +400,24 @@
 											<h7 class="card-title">Elevator Trim (%)</h7><br><br>
 											<table>
 												<tbody>
-												<tr>
-													<td><div id="elevator-trim-slider" class="slider vertical-slider"></div></td>
-													<td><span id=elevator-trim-pct>?</span></td>
-												</tr>
+													<tr>
+														<td><div id="elevator-trim-slider" class="slider vertical-slider"></div></td>
+														<td><span id=elevator-trim-pct>?</span></td>
+													</tr>
 												</tbody>
 											</table>
 										</div>
 									</div>
 								</div>
-								<!--
 								<div class="col-12">
 									<div class="card bg-light">
 										<div class="card-body"">
 											<h7 class="card-title">Rudder Trim (%)</h7>
-											<div id="rudder-trim-slider" class="slider mt-3"></div
+											<div id="rudder-trim-slider" class="slider mt-3"></div>
 											<div class="text-center"><span style="text-align: center" id=rudder-trim-pct>?</span></div>
 										</div>
 									</div>
 								</div>
-								-->
 
 							</div>
 						</div>
@@ -416,7 +521,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<!-- RADIOS -->
 				<div class="card">
 					<div id="collapseRadios" class="collapse" aria-labelledby="collapseRadios" data-parent="#accordionHUD">
@@ -428,7 +533,13 @@
 
 											<table style="border-collapse:separate; border-spacing:0 5px; vertical-align: center">
 												<tr>
-													<td>COM1 Frequency</td>
+													<td colspan="2">COM1</td>
+												</tr>
+												<tr>
+													<td width="50%">Active: <input type="text" value="118.200" size="8" style="width:8em" id="com1_active" /></td>
+													<td width="50%">Stby: <input type="text" value="119.450" size="8" style="width:8em" id="com1_stby" /></td>
+												</tr>
+												<tr>
 													<td colspan="2">
 														<button onclick="triggerSimEvent ('COM_RADIO_WHOLE_DEC', 1, true)" id="autopilot-com-freq" type="button" class="btn m-1 btn-danger" title="Decrease COM1 frequency by 1 MHz" style="width:55px">&lt;&lt;</button>
 														<button onclick="triggerSimEvent ('COM_RADIO_FRACT_DEC', 1, true)" id="autopilot-com-freq" type="button" class="btn m-1 btn-danger" title="Decrease COM1 frequency by 25 kHz" style="width:55px">&lt;</button>
@@ -439,7 +550,13 @@
 												</tr>
 
 												<tr>
-													<td>COM2 Frequency</td>
+													<td colspan="2">COM2</td>
+												</tr>
+												<tr>
+													<td>Active: <input type="text" value="118.200" size="8" style="width:8em" id="com2_active" /></td>
+													<td>Stby: <input type="text" value="119.450" size="8" style="width:8em" id="com2_stby" /></td>
+												</tr>
+												<tr>
 													<td colspan="2">
 														<button onclick="triggerSimEvent ('COM2_RADIO_WHOLE_DEC', 1, true)" id="autopilot-com-freq" type="button" class="btn m-1 btn-danger" title="Decrease COM2 frequency by 1 MHz" style="width:55px">&lt;&lt;</button>
 														<button onclick="triggerSimEvent ('COM2_RADIO_FRACT_DEC', 1, true)" id="autopilot-com-freq" type="button" class="btn m-1 btn-danger" title="Decrease COM2 frequency by 25 kHz" style="width:55px">&lt;</button>
@@ -450,7 +567,13 @@
 												</tr>
 
 												<tr>
-													<td>NAV1 Frequency</td>
+													<td colspan="2">NAV1</td>
+												</tr>
+												<tr>
+													<td>Active: <input type="text" value="118.200" size="8" style="width:8em" id="nav1_active" /></td>
+													<td>Stby: <input type="text" value="119.450" size="8" style="width:8em" id="nav1_stby" /></td>
+												</tr>
+												<tr>
 													<td colspan="2">
 														<button onclick="triggerSimEvent ('NAV1_RADIO_WHOLE_DEC', 1, true)" id="autopilot-com-freq" type="button" class="btn m-1 btn-danger" title="Decrease NAV1 frequency by 1 MHz" style="width:55px">&lt;&lt;</button>
 														<button onclick="triggerSimEvent ('NAV1_RADIO_FRACT_DEC', 1, true)" id="autopilot-com-freq" type="button" class="btn m-1 btn-danger" title="Decrease NAV1 frequency by 25 kHz" style="width:55px">&lt;</button>
@@ -461,7 +584,13 @@
 												</tr>
 
 												<tr>
-													<td>NAV2 Frequency</td>
+													<td colspan="2">NAV2</td>
+												</tr>
+												<tr>
+													<td>Active: <input type="text" value="118.200" size="8" style="width:8em" id="nav2_active" /></td>
+													<td>Stby: <input type="text" value="119.450" size="8" style="width:8em" id="nav2_stby" /></td>
+												</tr>
+												<tr>
 													<td colspan="2">
 														<button onclick="triggerSimEvent ('NAV2_RADIO_WHOLE_DEC', 1, true)" id="autopilot-com-freq" type="button" class="btn m-1 btn-danger" title="Decrease NAV2 frequency by 1 MHz" style="width:55px">&lt;&lt;</button>
 														<button onclick="triggerSimEvent ('NAV2_RADIO_FRACT_DEC', 1, true)" id="autopilot-com-freq" type="button" class="btn m-1 btn-danger" title="Decrease NAV2 frequency by 25 kHz" style="width:55px">&lt;</button>
@@ -562,7 +691,7 @@
 </script>
 
 <script>
-    $("#elevator-trim-slider")
+    /*$("#elevator-trim-slider")
         .slider({
             min: -30,
             max: 30,
@@ -572,8 +701,8 @@
             step: "10",
             first: "pip",
             last: "pip"
-        });
-
+        });*/
+	/*
     $("#flaps-slider")
         .slider({
             min: -100,
@@ -585,8 +714,8 @@
             step: "50",
             first: "pip",
             last: "pip"
-        });
-
+        });*/
+	/*
     $("#rudder-trim-slider")
         .slider({
             min: -50,
@@ -598,7 +727,7 @@
             first: "pip",
             last: "pip"
         });
-
+		*/
 </script>
 
 <!--Boostrap JS-->

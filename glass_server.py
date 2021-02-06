@@ -158,6 +158,41 @@ request_throttle = [
 	'FULL_THROTTLE_THRUST_TO_WEIGHT_RATIO',  # Full throttle thrust to weight ratio
 ]
 
+request_switches = [
+	'PANEL_ANTI_ICE_SWITCH',  #  Anti-ice sw 
+	'PITOT_HEAT',  #  Petot heat status
+	'GENERAL_ENG_FUEL_PUMP_SWITCH',  #  Fuel pump sw status
+	]
+
+request_miscellanous = [
+	'PAUSE_TOGGLE',  #  Toggles pause on/off Disabled 
+	'VIDEO_RECORD_TOGGLE',  #  Turn on or off the video recording feature. This records uncompressed AVI formatfiles to: My DocumentsVideos\ Shared Cockpit 
+]
+
+request_light = [
+	'LIGHT_STROBE', 
+	'LIGHT_LANDING',
+	'LIGHT_PANEL',  
+	'LIGHT_BEACON',  
+	'LIGHT_TAXI',
+	'LIGHT_LOGO',
+	'LIGHT_RECOGNITION', 
+	'LIGHT_WING',
+	'LIGHT_NAV',
+	'LIGHT_CABIN',
+]
+
+request_comms = [
+	'COM_ACTIVE_FREQUENCY:1', 
+	'COM_STANDBY_FREQUENCY:1',
+	'COM_ACTIVE_FREQUENCY:2', 
+	'COM_STANDBY_FREQUENCY:2',
+	'NAV_ACTIVE_FREQUENCY:1', 
+	'NAV_STANDBY_FREQUENCY:1',
+	'NAV_ACTIVE_FREQUENCY:2', 
+	'NAV_STANDBY_FREQUENCY:2',
+]
+
 request_gear = [
 	'IS_GEAR_RETRACTABLE',  # True if gear can be retracted
 	'IS_GEAR_SKIS',  # True if landing gear is skis
@@ -291,6 +326,9 @@ def get_dataset(data_type):
 	if data_type == "trim": request_to_action = request_trim
 	if data_type == "autopilot": request_to_action = request_autopilot
 	if data_type == 'cabin': request_to_action = request_cabin
+	if data_type == 'miscellanous': request_to_action = request_miscellanous
+	if data_type == 'switches': request_to_action = request_switches
+	if data_type == 'lights': request_to_action = request_light
 	#if data_type == "ui": request_to_action = request_ui   # see comment above as to why I've removed this
 
 	return request_to_action
@@ -348,6 +386,43 @@ def output_ui_variables():
 	# Cabin
 	ui_friendly_dictionary["CABIN_SEATBELTS_ALERT_SWITCH"] = aq.get("CABIN_SEATBELTS_ALERT_SWITCH")
 	ui_friendly_dictionary["CABIN_NO_SMOKING_ALERT_SWITCH"] = aq.get("CABIN_NO_SMOKING_ALERT_SWITCH")
+	
+	# Lights
+	ui_friendly_dictionary["LIGHT_STROBE"] = aq.get("LIGHT_STROBE")
+	ui_friendly_dictionary["LIGHT_LANDING"] = aq.get("LIGHT_LANDING")
+	ui_friendly_dictionary["LIGHT_PANEL"] = aq.get("LIGHT_PANEL")
+	ui_friendly_dictionary["LIGHT_BEACON"] = aq.get("LIGHT_BEACON")
+	ui_friendly_dictionary["LIGHT_TAXI"] = aq.get("LIGHT_TAXI")
+	ui_friendly_dictionary["LIGHT_LOGO"] = aq.get("LIGHT_LOGO")
+	ui_friendly_dictionary["LIGHT_RECOGNITION"] = aq.get("LIGHT_RECOGNITION")
+	ui_friendly_dictionary["LIGHT_WING"] = aq.get("LIGHT_WING")
+	ui_friendly_dictionary["LIGHT_NAV"] = aq.get("LIGHT_NAV")
+	ui_friendly_dictionary["LIGHT_CABIN"] = aq.get("LIGHT_CABIN")
+
+	# Miscellanous
+	ui_friendly_dictionary["PAUSE_TOGGLE"] = aq.get("PAUSE_TOGGLE")
+	ui_friendly_dictionary["VIDEO_RECORD_TOGGLE"] = aq.get("VIDEO_RECORD_TOGGLE")
+
+	# Switches
+	ui_friendly_dictionary["PANEL_ANTI_ICE_SWITCH"] = aq.get("PANEL_ANTI_ICE_SWITCH")
+	ui_friendly_dictionary["PITOT_HEAT"] = aq.get("PITOT_HEAT")
+	ui_friendly_dictionary["GENERAL_ENG_FUEL_PUMP_SWITCH"] = aq.get("GENERAL_ENG_FUEL_PUMP_SWITCH:1")
+	
+	# Comms
+	ui_friendly_dictionary["COM_ACTIVE_FREQUENCY1"] = aq.get("COM_ACTIVE_FREQUENCY:1")
+	ui_friendly_dictionary["COM_STANDBY_FREQUENCY1"] = aq.get("COM_STANDBY_FREQUENCY:1")
+	ui_friendly_dictionary["COM_ACTIVE_FREQUENCY2"] = aq.get("COM_ACTIVE_FREQUENCY:2")
+	ui_friendly_dictionary["COM_STANDBY_FREQUENCY2"] = aq.get("COM_STANDBY_FREQUENCY:2")
+	ui_friendly_dictionary["NAV_ACTIVE_FREQUENCY1"] = aq.get("NAV_ACTIVE_FREQUENCY:1")
+	ui_friendly_dictionary["NAV_STANDBY_FREQUENCY1"] = aq.get("NAV_STANDBY_FREQUENCY:1")
+	ui_friendly_dictionary["NAV_ACTIVE_FREQUENCY2"] = aq.get("NAV_ACTIVE_FREQUENCY:2")
+	ui_friendly_dictionary["NAV_STANDBY_FREQUENCY2"] = aq.get("NAV_STANDBY_FREQUENCY:2")
+
+	# Aircraft
+	ui_friendly_dictionary["ATC_TYPE"] = str(aq.get("ATC_TYPE"))
+	ui_friendly_dictionary["ATC_MODEL"] = str(aq.get("ATC_MODEL"))
+	ui_friendly_dictionary["ATC_AIRLINE"] = str(aq.get("ATC_AIRLINE"))
+	ui_friendly_dictionary["ATC_FLIGHT_NUMBER"] = str(aq.get("ATC_FLIGHT_NUMBER"))
 
 	return jsonify(ui_friendly_dictionary)
 

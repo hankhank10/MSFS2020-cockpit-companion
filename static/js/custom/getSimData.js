@@ -6,6 +6,30 @@ let airspeed;
 let latitude;
 let longitude;
 
+let fuel_pump;
+let pitot_heat;
+let panel_anti_ice_sw;
+
+let light_strobe;
+let light_landing;
+let light_nav;
+let light_taxi;
+let light_beacon;
+let light_logo;
+let light_recognition;
+let light_wing;
+let light_cabin;
+let light_panel;
+
+let com1_active;
+let com1_stby;
+let com2_active;
+let com2_stby;
+let nav1_active;
+let nav1_stby;
+let nav2_active;
+let nav2_stby;
+
 let autopilot_master;
 let autopilot_nav_selected;
 let autopilot_wing_leveler;
@@ -45,6 +69,8 @@ window.setInterval(function(){
 function getSimulatorData() {
     $.getJSON($SCRIPT_ROOT + '/ui', {}, function(data) {
 
+        console.log(data)
+
         //Navigation
         altitude = data.ALTITUDE;
         vertical_speed = data.VERTICAL_SPEED;
@@ -52,6 +78,23 @@ function getSimulatorData() {
         airspeed = data.AIRSPEED_INDICATE;
         latitude = data.LATITUDE;
         longitude = data.LONGITUDE;
+
+        // Switches
+        panel_anti_ice_sw = data.PANEL_ANTI_ICE_SWITCH
+        pitot_heat = data.PITOT_HEAT
+        fuel_pump = data.GENERAL_ENG_FUEL_PUMP_SWITCH
+
+        // Lights
+        light_strobe = data.LIGHT_STROBE
+        light_landing = data.LIGHT_LANDING
+        light_nav = data.LIGHT_NAV
+        light_taxi = data.LIGHT_TAXI
+        light_beacon = data.LIGHT_BEACON
+        light_logo = data.LIGHT_LOGO
+        light_recognition = data.LIGHT_RECOGNITION
+        light_wing = data.LIGHT_WING
+        light_cabin = data.LIGHT_CABIN
+        light_panel = data.LIGHT_PANEL
 
         //Fuel
         fuel_percentage = data.FUEL_PERCENTAGE;
@@ -75,6 +118,16 @@ function getSimulatorData() {
         autopilot_flight_director_active = data.AUTOPILOT_FLIGHT_DIRECTOR_ACTIVE;
         autopilot_airspeed_hold = data.AUTOPILOT_AIRSPEED_HOLD;
         autopilot_airspeed_hold_var = data.AUTOPILOT_AIRSPEED_HOLD_VAR;
+
+        // Radios
+        com1_active = data.COM_ACTIVE_FREQUENCY1;
+        com1_stby = data.COM_STANDBY_FREQUENCY1;
+        com2_active = data.COM_ACTIVE_FREQUENCY2;
+        com2_stby = data.COM_STANDBY_FREQUENCY2;
+        nav1_active = data.NAV_ACTIVE_FREQUENCY1;
+        nav1_stby = data.NAV_STANDBY_FREQUENCY1;
+        nav2_active = data.NAV_ACTIVE_FREQUENCY2;
+        nav2_stby = data.NAV_STANDBY_FREQUENCY2;
 
         //Control surfaces
         gear_handle_position = data.GEAR_HANDLE_POSITION;
@@ -135,8 +188,99 @@ function displayData() {
     $("#elevator-trim-pct").text(elevator_trim_pct);
     $("#elevator-trim-slider").slider({values: [elevator_trim_pct_reversed]})
 
-    //$("#rudder-trim-pct").text(rudder_trim_pct);
-    //$("#rudder-trim-slider").slider({values: [rudder_trim_pct]})
+    $("#rudder-trim-pct").text(rudder_trim_pct);
+    $("#rudder-trim-slider").slider({values: [rudder_trim_pct]})
+
+
+    //Switches
+    if (fuel_pump === 1) {
+        $("#fuel_pump").removeClass("btn-outline-danger").addClass("btn-danger").html("Fuel pump on");
+    } else {
+        $("#fuel_pump").removeClass("btn-danger").addClass("btn-outline-danger").html("Fuel pump off");
+    }
+    if (panel_anti_ice_sw === 1) {
+        $("#anti-ice").removeClass("btn-outline-danger").addClass("btn-danger").html("Anti-ice on");
+    } else {
+        $("#anti-ice").removeClass("btn-danger").addClass("btn-outline-danger").html("Anti-ice off");
+    }
+    if (pitot_heat === 1) {
+        $("#pitot-heat").removeClass("btn-outline-danger").addClass("btn-danger").html("Pitot heat on");
+    } else {
+        $("#pitot-heat").removeClass("btn-danger").addClass("btn-outline-danger").html("Pitot heat off");
+    }
+
+    // Radios
+    $("#com1_active").val(com1_active.toFixed(3))
+    $("#com1_stby").val(com1_stby.toFixed(3))
+    $("#com2_active").val(com2_active.toFixed(3))
+    $("#com2_stby").val(com2_stby.toFixed(3))
+    $("#nav1_active").val(nav1_active.toFixed(3))
+    $("#nav1_stby").val(nav1_stby.toFixed(3))
+    $("#nav2_active").val(nav2_active.toFixed(3))
+    $("#nav2_stby").val(nav2_stby.toFixed(3))
+
+    //Lights
+    $("#strobes_toggle").checked = light_strobe
+    $("#landing_lights_toggle").checked = light_landing
+    $("#toggle_nav_lights").checked = light_nav
+    $("#toggle_taxi_lights").checked = light_taxi
+    $("#toggle_beacon_lights").checked = light_beacon
+    $("#toggle_logo_lights").checked = light_logo
+    $("#toggle_recognition_lights").checked = light_recognition
+    $("#toggle_wing_lights").checked = light_wing
+    $("#toggle_cabin_lights").checked = light_cabin
+    $("#toggle_panel_lights").checked = light_panel
+    /*
+    if (light_strobe === 1) {
+        $("#strobes_toggle").removeClass("btn-outline-danger").addClass("btn-danger").html("Strobes on");
+    } else {
+        $("#strobes_toggle").removeClass("btn-danger").addClass("btn-outline-danger").html("Strobes off");
+    }
+    if (light_landing === 1) {
+        $("#landing_lights_toggle").removeClass("btn-outline-danger").addClass("btn-danger").html("Landing lights on");
+    } else {
+        $("#landing_lights_toggle").removeClass("btn-danger").addClass("btn-outline-danger").html("Landing lights off");
+    }
+    if (light_nav === 1) {
+        $("#toggle_nav_lights").removeClass("btn-outline-danger").addClass("btn-danger").html("Nav lights on");
+    } else {
+        $("#toggle_nav_lights").removeClass("btn-danger").addClass("btn-outline-danger").html("Nav lights off");
+    }
+    if (light_taxi === 1) {
+        $("#toggle_taxi_lights").removeClass("btn-outline-danger").addClass("btn-danger").html("Taxi lights on");
+    } else {
+        $("#toggle_taxi_lights").removeClass("btn-danger").addClass("btn-outline-danger").html("Taxi lights off");
+    }
+    if (light_beacon === 1) {
+        $("#toggle_beacon_lights").removeClass("btn-outline-danger").addClass("btn-danger").html("Beacon lights on");
+    } else {
+        $("#toggle_beacon_lights").removeClass("btn-danger").addClass("btn-outline-danger").html("Beacon lights off");
+    }
+    if (light_logo === 1) {
+        $("#toggle_logo_lights").removeClass("btn-outline-danger").addClass("btn-danger").html("Logo lights on");
+    } else {
+        $("#toggle_logo_lights").removeClass("btn-danger").addClass("btn-outline-danger").html("Logo lights off");
+    }
+    if (light_recognition === 1) {
+        $("#toggle_recognition_lights").removeClass("btn-outline-danger").addClass("btn-danger").html("Recognition lights on");
+    } else {
+        $("#toggle_recognition_lights").removeClass("btn-danger").addClass("btn-outline-danger").html("Recognition lights off");
+    }
+    if (light_wing === 1) {
+        $("#toggle_wing_lights").removeClass("btn-outline-danger").addClass("btn-danger").html("Wing lights on");
+    } else {
+        $("#toggle_wing_lights").removeClass("btn-danger").addClass("btn-outline-danger").html("Wing lights off");
+    }
+    if (light_cabin === 1) {
+        $("#toggle_cabin_lights").removeClass("btn-outline-danger").addClass("btn-danger").html("Cabin lights on");
+    } else {
+        $("#toggle_cabin_lights").removeClass("btn-danger").addClass("btn-outline-danger").html("Cabin lights off");
+    }
+    if (light_panel === 1) {
+        $("#toggle_panel_lights").removeClass("btn-outline-danger").addClass("btn-danger").html("Panel lights on");
+    } else {
+        $("#toggle_panel_lights").removeClass("btn-danger").addClass("btn-outline-danger").html("Panel lights off");
+    }*/
 
     //Cabin
     if (cabin_seatbelts_alert_switch === 1){
@@ -171,17 +315,22 @@ function toggleFollowPlane() {
         $("#followModeButton").removeClass("btn-primary").addClass("btn-outline-danger")
     }
 }
+function mapSwitch() {
+    $("#map_column").toggle();
+}
 
 function updateMap() {
-    var pos = L.latLng(latitude, longitude);
+    if ((typeof latitude === 'undefined') || (typeof longitude === 'undefined')) {
+        return
+    }
 
-    marker.slideTo(	pos, {
+    marker.slideTo(	[latitude, longitude], {
         duration: 1500,
     });
     marker.setRotationAngle(compass);
 
     if (followPlane === true) {
-        map.panTo(pos);
+        map.panTo([latitude, longitude]);
     }
 }
 
@@ -191,7 +340,8 @@ function setSimDatapoint(datapointToSet, valueToUse) {
 }
 
 function triggerSimEvent(eventToTrigger, valueToUse, hideAlert = false){
-    url_to_call = "/event/"+eventToTrigger+"/trigger";
+    url_to_call = "/event/" + eventToTrigger + "/trigger";
+    console.log(url_to_call)
     $.post( url_to_call, { value_to_use: valueToUse } );
 
     if (!hideAlert) {
